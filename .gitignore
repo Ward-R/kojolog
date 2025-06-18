@@ -1,0 +1,35 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore uploaded files in development.
+/public/uploads # If you use Active Storage, ignore uploaded files in public/uploads
+
+# Ignore System/OS files
+.DS_Store
+.byebug_history
+.idea/
+.env*.local
+
+# Ignore compiled Ruby files
+*.rbc
+
+# Ignore Yarn cache
+.yarn-cache/
+
+# Ignore Ruby gems installation
+/vendor/bundle/
+
+# Ignore node_modules
+/node_modules/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore master key, if you're not using vault
+/config/master.key
+/config/credentials/development.key
+/config/credentials/test.key
