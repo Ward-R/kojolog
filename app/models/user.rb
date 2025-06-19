@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
          enum role: { standard: 0, admin: 1, manager: 2 }
+
+  has_many :log_entrys
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
 end
