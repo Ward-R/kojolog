@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_18_055753) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_19_053846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,8 +36,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_18_055753) do
     t.bigint "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["date", "unit_id"], name: "index_logs_on_date_and_unit_id", unique: true
+    t.string "shift_type"
+    t.index ["date", "unit_id", "shift_type"], name: "index_logs_on_date_and_unit_id_and_shift_type", unique: true
     t.index ["unit_id"], name: "index_logs_on_unit_id"
+  end
+
+  create_table "sign_offs", force: :cascade do |t|
+    t.datetime "signed_at"
+    t.text "notes"
+    t.jsonb "log_entries_at_signoff"
+    t.bigint "log_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sign_off_type"
+    t.index ["log_id", "sign_off_type"], name: "index_sign_offs_on_log_id_and_sign_off_type", unique: true
+    t.index ["log_id"], name: "index_sign_offs_on_log_id"
+    t.index ["user_id"], name: "index_sign_offs_on_user_id"
   end
 
   create_table "units", force: :cascade do |t|
@@ -56,6 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_18_055753) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -64,4 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_18_055753) do
   add_foreign_key "log_entries", "logs"
   add_foreign_key "log_entries", "users"
   add_foreign_key "logs", "units"
+  add_foreign_key "sign_offs", "logs"
+  add_foreign_key "sign_offs", "users"
 end
