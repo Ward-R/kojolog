@@ -1,0 +1,2 @@
+class SignOffsController < ApplicationController
+end

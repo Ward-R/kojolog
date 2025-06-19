@@ -1,0 +1,32 @@
+<h1>Welcome to Kojolog!</h1>
+<p>Your centralized system for managing logs and operational data.</p>
+<hr>
+<h2>Recent Logs</h2>
+<% if @recent_logs.any? %>
+  <ul>
+    <% @recent_logs.each do |log| %>
+      <li>
+        <%= log.created_at.strftime("%Y-%m-%d %H:%M") %> -
+        <%= link_to "Log for #{log.unit.name} (#{log.shift_type} shift on #{log.date.strftime("%Y-%m-%d")})", log_path(log) %>
+      </li>
+    <% end %>
+  </ul>
+  <p><%= link_to "View all logs", logs_path, class: "btn btn-info" %></p>
+<% else %>
+  <p>No recent logs to display yet. Start by creating a new log!</p>
+<% end %>
+<hr>
+<h2>Quick Links</h2>
+<ul>
+  <li><%= link_to "Browse all Units", units_path %></li>
+  <li><%= link_to "View all Users", users_path %></li>
+  <% if current_user %>
+    <li><%= link_to "My Logs", user_logs_path(current_user) %></li>
+  <% end %>
+</ul>
+<% if user_signed_in? %>
+  <p>Logged in as: <%= current_user.first_name %> <%= current_user.last_name %> (<%= current_user.email %>)</p>
+  <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %>
+<% end %>
