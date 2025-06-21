@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-         enum role: { standard: 0, admin: 1, manager: 2 }
+         enum role: { view_only: 0, operator: 1, shift_engineer: 2, chief: 3, admin: 4 }
 
   has_many :log_entrys
   validates :first_name, presence: true
