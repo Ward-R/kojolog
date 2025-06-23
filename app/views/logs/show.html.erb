@@ -1,0 +1,24 @@
+<div class="container my-5" id="show-outer-box">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center mb-4">Log Details</h1>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= @log.title %></h5>
+          <p class="card-text"><%= @log.shift_type %></p>
+          <div>
+            <% @log.log_entries.each do |entry| %>
+              <p class="card-text">Description: <%= entry.content %></p>
+              <p class="card-text">User: <%= entry.user.first_name%> <%= entry.user.last_name%> || Entry time: <%= entry.created_at%> </p>
+            <% end %>
+          </div>
+          <p class="card-text"><strong>Created At:</strong> <%= @log.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <p class="card-text"><strong>Updated At:</strong> <%= @log.updated_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+        </div>
+      </div>
+      <div class="mt-4">
+        <%= link_to 'Back to Logs', logs_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
