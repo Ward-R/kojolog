@@ -1,6 +1,6 @@
 class Log < ApplicationRecord
   belongs_to :unit
-  has_many :log_entrys
+  has_many :log_entries
 
   validates :date, presence: true
   validates :status, presence: true
