@@ -1,0 +1,15 @@
+<h2>Units</h2>
+<% if @units.any? %>
+  <ul>
+    <% @units.each do |unit| %>
+      <li>
+        <%= unit.name %>
+        <%= unit.description %>
+        <%= link_to "Unit Link #{unit.name}", unit_path(unit) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No units to display! Contact Admin.</p>
+<% end %>
+<hr>
