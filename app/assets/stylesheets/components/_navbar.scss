@@ -8,5 +8,16 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 140px; /* Keep this if it's the desired maximum size */
+  height: auto; /* Good practice to prevent distortion */
+  /* Add margin around the image if it's too close to other elements */
+  /* margin: 4px; */
+  /* Or if the whole .navbar-brand needs padding */
+}
+
+.navbar-lewagon .navbar-brand {
+  /* This refers to the container of your logo (often an <a> tag) */
+  padding: 0 8px; /* Adds horizontal padding to the logo container */
+  /* OR */
+  /* margin-right: 15px; /* If you want space to the right of the logo */
 }

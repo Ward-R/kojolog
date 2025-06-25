@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :units do
     resources :logs, shallow: true, except: [:destroy] do
-      resources :log_entries, only: [:create, :index]
+      resources :log_entries, only: [:new, :create, :index]
       resources :sign_offs, only: [:new, :create]
     end
     # resources :templates here later
