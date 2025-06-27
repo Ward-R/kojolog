@@ -16,7 +16,7 @@ RSpec.describe LogEntry, type: :model do
     )
   end
   let!(:unit) { Unit.create!(name: "Test Unit #{SecureRandom.hex(4)}") }
-  let!(:log)  { Log.create!(title: "Test Log for Entry #{SecureRandom.hex(4)}", date: Date.today, status: :normal, shift_type: "Day Shift", unit: unit) }
+  let!(:log)  { Log.create!(title: "Test Log for Entry #{SecureRandom.hex(4)}", date: Date.today, status: :open, shift_type: "Day Shift", unit: unit) }
 
   # Test case 1: LogEntry is valid with all required content
   it 'is valid with content' do
