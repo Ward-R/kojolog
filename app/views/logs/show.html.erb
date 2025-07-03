@@ -2,23 +2,62 @@
   <div class="row">
     <div class="col-md-12">
       <h1 class="text-center mb-4">Log Details</h1>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= @log.title %></h5>
-          <p class="card-text"><%= @log.shift_type %></p>
-          <div>
-            <% @log.log_entries.each do |entry| %>
-              <p class="card-text">Description: <%= entry.content %></p>
-              <p class="card-text">User: <%= entry.user.first_name%> <%= entry.user.last_name%> || Entry time: <%= entry.created_at%> </p>
-            <% end %>
+      <%# Reduced size and prominence of Log Details %>
+      <div class="card mb-4 p-3"> <%# p-3 for padding, mb-4 for margin below %>
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="card-title mb-2"><%= @log.title %></h5>
+            <%# Smaller title, less margin %>
+            <p class="card-text small mb-1"><strong>Shift Type:</strong> <%= @log.shift_type %></p>
+            <%# Smaller text, less margin %>
+            <p class="card-text small mb-1"><strong>Status:</strong> <%= @log.status.humanize %></p>
           </div>
-          <p class="card-text"><strong>Created At:</strong> <%= @log.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
-          <p class="card-text"><strong>Updated At:</strong> <%= @log.updated_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <div class="col-md-6 text-md-end"> <%# Align dates to the right on medium screens and up %>
+            <p class="card-text small mb-1"><strong>Created At:</strong> <%= @log.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+            <p class="card-text small mb-0"><strong>Last Updated:</strong> <%= @log.updated_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+          </div>
         </div>
       </div>
+      <h2 class="mb-3">Log Entries</h2>
+      <div class="log-entries-container">
+        <% if @log.log_entries.any? %>
+          <%# Order by created_at: :asc for oldest first %>
+          <% @log.log_entries.order(created_at: :asc).each_with_index do |entry, index| %>
+            <div class="log-entry-item card border-0 rounded-0"> <%# Removed mb-3, border, and rounded corners %>
+              <div class="card-body py-3"> <%# Adjusted vertical padding %>
+                <div class="row">
+                  <div class="col-md-3 border-end pe-3">
+                    <small class="text-muted d-block mb-1">
+                      <strong>User:</strong> <%= entry.user.first_name %> <%= entry.user.last_name %>
+                    </small>
+                    <small class="text-muted d-block">
+                      <strong>Time:</strong> <%= entry.created_at.strftime("%B %d, %Y %I:%M %p") %>
+                    </small>
+                    <small class="text-muted d-block mt-2">
+                      <strong>Type:</strong> <%= entry.entry_type.humanize %>
+                    </small>
+                    <small class="text-muted d-block">
+                      <strong>Section:</strong> <%= entry.section_identifier %>
+                    </small>
+                  </div>
+                  <div class="col-md-9 ps-4">
+                    <p class="mb-0"><%= entry.content %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%# Add separator only if it's not the last entry %>
+            <% unless index == @log.log_entries.length - 1 %>
+              <hr class="log-entry-separator">
+            <% end %>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No log entries for this log yet.</p>
+        <% end %>
+      </div>
       <div class="mt-4">
-        <%= link_to "Add New Log Entry", new_log_log_entry_path(@log), class: "btn btn-primary mt-3" %>
-        <%= link_to 'Back to Logs', logs_path, class: 'btn btn-primary mt-3' %>
+        <%= link_to "Add New Log Entry", new_log_log_entry_path(@log), class: "btn btn-primary me-2" %>
+        <%= link_to 'Back to Logs', logs_path, class: 'btn btn-secondary' %>
       </div>
     </div>
   </div>

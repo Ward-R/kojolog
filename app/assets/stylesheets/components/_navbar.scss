@@ -21,3 +21,30 @@
   /* OR */
   /* margin-right: 15px; /* If you want space to the right of the logo */
 }
+
+  .log-entry-separator {
+    border: 0;
+    height: 1px;
+    /* Faint grey line */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Remove vertical margin to make it flush */
+    margin: 0;
+  }
+
+  /* Optional: Add a slight border to the log entries container if you want a subtle box around them */
+  .log-entries-container {
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Faint border */
+    border-radius: 0.25rem; /* Match Bootstrap card border-radius */
+    overflow: hidden; /* Ensures borders/lines don't bleed out */
+  }
+
+  /* Remove default card styling from individual entry items */
+  .log-entry-item.card {
+    background-color: transparent; /* Remove background color */
+    box-shadow: none; /* Remove shadow */
+  }
+
+  /* Add a slight background to alternate entries for better readability (optional) */
+  .log-entry-item.card:nth-child(odd) {
+    background-color: #f9f9f9; /* Very light grey for odd entries */
+  }
