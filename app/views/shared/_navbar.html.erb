@@ -3,11 +3,20 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo2.png", alt: "Kojolog Logo", class: "navbar-brand" %>
     <% end %>
+    <%# --- START Unit Tabs (Left-aligned, next to logo) --- %>
+    <ul class="navbar-nav me-auto unit-tabs-nav"> <%# Added custom class 'unit-tabs-nav' for styling %>
+      <% @all_units.each do |unit| %>
+        <li class="nav-item <%= 'active' if @unit && @unit == unit %>">
+          <%= link_to unit.name, unit_path(unit), class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+    <%# --- END Unit Tabs --- %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav ms-auto"> <%# Use ms-auto for right alignment (Bootstrap 5) %>
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>

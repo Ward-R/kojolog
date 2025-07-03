@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   include Pundit::Authorization
+  before_action :set_all_units
 
+  private
+
+  def set_all_units
+    @all_units = Unit.all.order(:name)
+  end
   # Pundit: allow-list approach
 
 
