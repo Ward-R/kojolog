@@ -10,3 +10,6 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+// Import Trix and Action Text SCSS/CSS ---
+@import "trix"; // Import your renamed trix_editor.scss
